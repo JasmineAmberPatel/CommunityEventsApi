@@ -1,4 +1,5 @@
 ﻿using CommunityEventsApi.Data;
+using MiniValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<EventsDatabaseSettings>(builder.Configuration.GetSection("EventsDatabaseSettings"));
@@ -17,8 +18,12 @@ app.MapGet("/events/{id}", async (EventsService eventsService, string id) =>
 
 app.MapPost("/events", async (EventsService eventsService, Event newEvent) =>
 {
-    await eventsService.Create(newEvent);
-    return Results.Ok();
+    if (MiniValidator.TryValidate(newEvent, out var errors))
+    {
+        await eventsService.Create(newEvent);
+        return Results.Ok();
+    }
+    return Results.ValidationProblem(errors);
 });
 
 app.MapPut("/events/{id}", async (EventsService eventsService, string id, Event updatedEvent) =>
@@ -43,3 +48,5 @@ app.MapDelete("/events/{id}", async (EventsService eventsService, string id) =>
 });
 
 app.Run();
+
+public partial class Program { }

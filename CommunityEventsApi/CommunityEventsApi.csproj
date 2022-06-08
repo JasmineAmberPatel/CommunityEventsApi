@@ -11,6 +11,7 @@
     <None Remove="Microsoft.Extensions.Options" />
     <None Remove="MongoDB.Driver" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <None Remove="MiniValidation" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -19,5 +20,6 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.16.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
+    <PackageReference Include="MiniValidation" Version="0.6.0-pre.20220527.55" />
   </ItemGroup>
 </Project>
