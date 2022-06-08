@@ -50,3 +50,5 @@ app.MapDelete("/events/{id}", async (EventsService eventsService, string id) =>
 app.Run();
 
 public partial class Program { }
+
+//test
