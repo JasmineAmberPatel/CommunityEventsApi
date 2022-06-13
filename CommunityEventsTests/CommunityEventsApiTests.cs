@@ -23,20 +23,21 @@ public class ApiTests
     public async Task ReturnOkWhenCorrectJsonIsSentToCreateEvent()
     {
         await using var application = new WebApplicationFactory<Program>();
+
         using var client = application.CreateClient();
 
         var result = await client.PostAsJsonAsync("/events", new Event
         {
-            Title = "Test event",
-            Date = "19/06/22",
+            Title = "Visit Santa's House",
+            Date = "25/12/22",
             Time = "08:00",
             Location = "Santa Claus Village",
             Latitude = 66.543701M,
             Longitude = 25.844311M,
             Price = 0.00M,
-            Description = "Have a magical time with Santa",
-            Link = "test",
-            ImageUrl = "test"
+            Description = "Have a magical time with Santa.",
+            Link = "https://santaclausvillage.info/",
+            ImageUrl = "https://unsplash.com/photos/liT5AlTmC8I"
         });
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);

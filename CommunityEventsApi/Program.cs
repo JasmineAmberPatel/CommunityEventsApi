@@ -4,7 +4,15 @@ using MiniValidation;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<EventsDatabaseSettings>(builder.Configuration.GetSection("EventsDatabaseSettings"));
 builder.Services.AddSingleton<EventsService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapGet("/", () => "Community Events Api");
 
@@ -50,5 +58,3 @@ app.MapDelete("/events/{id}", async (EventsService eventsService, string id) =>
 app.Run();
 
 public partial class Program { }
-
-//test
